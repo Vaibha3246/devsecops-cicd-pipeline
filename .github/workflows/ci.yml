@@ -101,4 +101,4 @@ jobs:
         with:
           args: >
             -Dsonar.projectKey=Vaibha3246_devsecops-cicd-pipeline
-            -Dsonar.organization=vaibh3246
+            -Dsonar.organization=vaibha3246

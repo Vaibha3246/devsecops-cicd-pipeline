@@ -102,3 +102,11 @@ jobs:
           args: >
             -Dsonar.projectKey=Vaibha3246_devsecops-cicd-pipeline
             -Dsonar.organization=vaibha3246
+
+      - name: SonarQube Quality Gate
+        uses: SonarSource/sonarqube-quality-gate-action@v1
+        timeout-minutes: 5
+        with:
+         pollingTimeoutSec: 240
+        env:
+         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}    

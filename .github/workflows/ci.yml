@@ -110,3 +110,28 @@ jobs:
          pollingTimeoutSec: 240
         env:
          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}    
+  
+
+  
+  docker-security:
+    name: Build and Scan Backend Image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Backend Docker Image
+        run: |
+          docker build \
+            -t saiteja-backend:${{ github.sha }} \
+            ./backend/website-backend
+
+      - name: Scan Backend Image with Trivy
+        uses: aquasecurity/trivy-action@0.33.0
+        with:
+          image-ref: saiteja-backend:${{ github.sha }}
+          format: table
+          vuln-type: os,library
+          severity: HIGH,CRITICAL
+          exit-code: '1'
+       

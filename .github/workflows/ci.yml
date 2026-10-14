@@ -127,7 +127,7 @@ jobs:
             ./backend/website-backend
 
       - name: Scan Backend Image with Trivy
-        uses: aquasecurity/trivy-action@0.33.0
+        uses: aquasecurity/trivy-action@<verified-full-commit-sha> # v0.36.0
         with:
           image-ref: saiteja-backend:${{ github.sha }}
           format: table

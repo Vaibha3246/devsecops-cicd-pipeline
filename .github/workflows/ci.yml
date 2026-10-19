@@ -126,11 +126,15 @@ jobs:
             -t saiteja-backend:${{ github.sha }} \
             ./backend/website-backend
 
+      
       - name: Inspect Backend Image
         run: |
           docker image inspect saiteja-backend:${{ github.sha }} \
-            --format '{{json .Config.Image}}'
-          docker history --no-trunc saiteja-backend:${{ github.sha }}    
+            --format 'Image={{.Config.Image}} OS={{.Os}} Architecture={{.Architecture}}'
+          docker history --no-trunc saiteja-backend:${{ github.sha }}
+          docker run --rm --entrypoint /bin/sh saiteja-backend:${{ github.sha }} \
+            -c 'cat /etc/os-release; command -v pebble || true; ls -l /usr/bin/pebble 2>/dev/null || true'
+    
 
       - name: Scan Backend Image with Trivy
         uses: aquasecurity/trivy-action@v0.36.0

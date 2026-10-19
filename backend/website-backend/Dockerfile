@@ -12,7 +12,7 @@ COPY src ./src
 RUN ./mvnw -B package -DskipTests
 
 # Stage 2: run on a JRE
-FROM eclipse-temurin:21-jre
+FROM eclipse-temurin:21-jre-jammy
 
 WORKDIR /app
 

@@ -126,6 +126,12 @@ jobs:
             -t saiteja-backend:${{ github.sha }} \
             ./backend/website-backend
 
+      - name: Inspect Backend Image
+        run: |
+          docker image inspect saiteja-backend:${{ github.sha }} \
+            --format '{{json .Config.Image}}'
+          docker history --no-trunc saiteja-backend:${{ github.sha }}    
+
       - name: Scan Backend Image with Trivy
         uses: aquasecurity/trivy-action@v0.36.0
         with:
@@ -134,4 +140,5 @@ jobs:
           vuln-type: os,library
           severity: HIGH,CRITICAL
           exit-code: '1'
+    
        

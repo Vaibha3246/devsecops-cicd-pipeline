@@ -17,6 +17,7 @@ services:
       start_period: 30s
 
   backend:
+    image: saiteja-backend:${IMAGE_TAG:-latest}
     build:
       context: ./backend/website-backend
       dockerfile: Dockerfile
@@ -35,6 +36,7 @@ services:
       - saiteja
 
   frontend:
+    image: saiteja-frontend:${IMAGE_TAG:-latest}
     build:
       context: .
       dockerfile: Dockerfile

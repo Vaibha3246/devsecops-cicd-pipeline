@@ -15,6 +15,7 @@ RUN npm run build
 
 # Stage 2: serve static files and reverse-proxy /api
 FROM nginx:alpine
+RUN apk update && apk upgrade --no-cache
 COPY nginx.conf /etc/nginx/nginx.conf
 
 COPY default.conf /etc/nginx/conf.d/default.conf
